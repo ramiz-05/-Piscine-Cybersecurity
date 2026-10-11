@@ -1,37 +1,25 @@
-.swatch {
-    width: 200px;
-    padding: 20px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: white;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.named { background-color: purple; 
+.container {
+    text-align: center;
 }
 
-.hex { background-color: #800080; 
+h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    color: black;
 }
 
-.rgb { background-color: rgb(128, 0, 128);
-}
-
-.rgba { background-color: rgba(128, 0, 128, 0.5);
-} 
-
-.comparison-box {
-    width: 300px;
-    padding: 20px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: black; 
-}
-
-.opacity-box {
-    background-color: rgb(0, 150, 255);
-    opacity: 0.5; 
-}
-
-.rgba-box {
-    background-color: rgba(0, 150, 255, 0.5);
+button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
 }

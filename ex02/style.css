@@ -1,33 +1,11 @@
-.square {
-    width: 100px;
-    height: 100px;
-    border: 2px solid black;
+body {
+    font-family: sans-serif;
+    margin: 20px;
 }
 
-.rectangle {
-    width: 200px;
-    height: 100px;
+.active {
+    background-color: yellow;
+    font-weight: bold;
+    padding: 10px;
     border: 2px solid black;
-}
-
-.circle {
-    width: 100px;
-    height: 100px;
-    border: 2px solid black;
-    border-radius: 50%;
-}
-
-.pill {
-    width: 200px;
-    height: 100px;
-    border: 2px solid black;
-    border-radius: 50px;
-}
-
-.triangle {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 100px solid black;
 }
