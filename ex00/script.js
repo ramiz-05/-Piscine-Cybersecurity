@@ -1,17 +1,25 @@
-const name ="RAMEZ";
+const themeToggleBtn = document.getElementById('theme-toggle');
+const bodyElement = document.body;
+const contactForm = document.getElementById('contact-form');
+const formFeedback = document.getElementById('form-feedback');
 
-let age =21;
-let code=true;
+themeToggleBtn.addEventListener('click', () => {
+    const isLightMode = bodyElement.classList.toggle('light-theme');
 
-console.log (" hi welcome in ex00 :" + name );
+    if (isLightMode) {
+        themeToggleBtn.textContent = '🌙 Dark Mode';
+    } else {
+        themeToggleBtn.textContent = '☀️ Light Mode';
+    }
+});
 
-console.log("the typeof for your name" ,typeof name);
-age=+1;
-console.log("your age after increment is:" + age);
+contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-console.log("the typeof for your name" ,typeof name);
-console.log("the typeof for your age" ,typeof age);
-console.log("the typeof for your code" ,typeof code);
+    const nameInput = document.getElementById('name').value.trim();
 
-
-
+    if (nameInput) {
+        formFeedback.textContent = `Thank you, ${nameInput}! Your message has been received.`;
+        contactForm.reset();
+    }
+});
