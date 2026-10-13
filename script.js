@@ -4,7 +4,7 @@ const contactForm = document.getElementById('contact-form');
 const formFeedback = document.getElementById('form-feedback');
 const skillCards = document.querySelectorAll('.skill-card');
 
-// 1. Light / Dark Galaxy Theme Toggle
+
 themeToggleBtn.addEventListener('click', () => {
     const isLightMode = bodyElement.classList.toggle('light-theme');
 
@@ -15,14 +15,13 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
-// 2. Interactive Skill "Plan" Cards (Click to lock open/close)
 skillCards.forEach((card) => {
     card.addEventListener('click', () => {
         card.classList.toggle('active-plan');
     });
 });
 
-// 3. Contact Form Submission (Mailto Integration)
+
 contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -34,7 +33,7 @@ contactForm.addEventListener("submit", function (event) {
         return;
     }
 
-    // Format the email subject and body
+   
     const subject = encodeURIComponent("Portfolio Contact — " + name);
     const body = encodeURIComponent(
         "Name: " + name +
@@ -42,18 +41,18 @@ contactForm.addEventListener("submit", function (event) {
         "\n\nMessage:\n" + message
     );
 
-    // Create the mailto link with your updated email address
+    
     const mailtoLink =
         "mailto:ramizaboramadan2@gmail.com" +
         "?subject=" + subject +
         "&body=" + body;
 
-    // Show a feedback message on the page
-    formFeedback.textContent = `Thank you, ${name}! Opening your email client...`;
+    
+    formFeedback.textContent = `Thank you, ${name} `;
 
-    // Open the default email client
+  
     window.location.href = mailtoLink;
 
-    // Reset the form fields
+   
     contactForm.reset();
 });
