@@ -22,14 +22,38 @@ skillCards.forEach((card) => {
     });
 });
 
-// 3. Contact Form Submission Feedback
-contactForm.addEventListener('submit', (event) => {
+// 3. Contact Form Submission (Mailto Integration)
+contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nameInput = document.getElementById('name').value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-    if (nameInput) {
-        formFeedback.textContent = `Thank you, ${nameInput}! Your message has been received.`;
-        contactForm.reset();
+    if (!name || !email || !message) {
+        return;
     }
+
+    // Format the email subject and body
+    const subject = encodeURIComponent("Portfolio Contact — " + name);
+    const body = encodeURIComponent(
+        "Name: " + name +
+        "\nEmail: " + email +
+        "\n\nMessage:\n" + message
+    );
+
+    // Create the mailto link with your updated email address
+    const mailtoLink =
+        "mailto:ramizaboramadan2@gmail.com" +
+        "?subject=" + subject +
+        "&body=" + body;
+
+    // Show a feedback message on the page
+    formFeedback.textContent = `Thank you, ${name}! Opening your email client...`;
+
+    // Open the default email client
+    window.location.href = mailtoLink;
+
+    // Reset the form fields
+    contactForm.reset();
 });
