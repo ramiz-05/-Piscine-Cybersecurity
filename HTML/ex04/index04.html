@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Form</title>
+</head>
+<body>
+	<form action="#" method="post">
+        
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required minlength="3">
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="8">
+        <br><br>
+
+        <label for="radio1">Option 1</label>
+        <input type="radio" id="radio1" name="group" value="option1" required>
+        
+        <label for="radio2">Option 2</label>
+        <input type="radio" id="radio2" name="group" value="option2" required>
+        <br><br>
+
+        <label for="dropdown">Choose an option:</label>
+        <select id="dropdown" name="dropdown" required>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+        </select>
+        <br><br>
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" required minlength="10"></textarea>
+        <br><br>
+
+        <label for="agreement">I agree to the terms:</label>
+        <input type="checkbox" id="agreement" name="agreement" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+        
+    </form>
+</body>
+</html>
