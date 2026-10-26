@@ -44,8 +44,4 @@ Depending on the module you want to run, ensure you have the following installed
 * **Docker** (for containerized tasks)
 * A modern **Web Browser** (for HTML/CSS/JS modules)
 
-### Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/ramiz-05/-Piscine-Cybersecurity.git](https://github.com/ramiz-05/-Piscine-Cybersecurity.git)
