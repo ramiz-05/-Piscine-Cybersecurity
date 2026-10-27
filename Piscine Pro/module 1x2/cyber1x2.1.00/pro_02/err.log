@@ -1,0 +1,12 @@
+./start.sh: line 10: docker-compose: command not found
+time="2026-10-27T14:46:00+03:00" level=warning msg="/home/raaburam/dev_workspace/Piscine Pro/module 1x2/cyber1x2.1.00/pro_02/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image pro_02-ssrf-lfi-app Building 
+ Image pro_02-ssrf-lfi-app Built 
+ Network pro_02_default Creating 
+ Network pro_02_default Creating 
+ Network pro_02_default Created 
+ Network pro_02_default Created 
+ Container pro_02-ssrf-lfi-app-1 Creating 
+ Container pro_02-ssrf-lfi-app-1 Created 
+ Container pro_02-ssrf-lfi-app-1 Starting 
+ Container pro_02-ssrf-lfi-app-1 Started 
