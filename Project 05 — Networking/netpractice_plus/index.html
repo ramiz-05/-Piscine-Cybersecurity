@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/netpractice.css">
+    <script src="js/intro.js"></script>
+    <meta charset="UTF-8">
+    <title>NetPractice Plus</title>
+  </head>
+
+  <body>
+    <div class='intro_div fade-in' style='width:44%; min-width:520px;'>
+      <center>
+		<div class='brand'>42 <span>AMMAN</span></div>
+		<h2>NetPractice Plus</h2>
+		<img src="img/icon.png">
+	  </center>
+	  <div class='tabs'>
+		<div id="button_0" onclick='showTab(0);'>Training</div>
+		<div id="button_1" onclick='showTab(1);'>Evaluation</div>
+		<div id="button_2" onclick='showTab(2);'>Level select</div>
+	  </div>
+
+	  <div id='tab_0' class="tab">
+		Enter your intranet login:<br />
+		<input id='input_login' type=text size=15 placeholder="login"><br />
+		<span class='footnote'>Your login seeds the random addresses, so your configuration is always the same.</span>
+		<br /><br />
+		<input type=button value="Start!" onclick='save_login();'>
+		<span class='footnote'>20 levels: 1-10 are the classics, 11-20 are the advanced ones (VLSM, route summaries, loops, dual Internet links...).</span>
+	  </div>
+	  <div id='tab_1' class="tab">
+		In this evaluation mode, three random levels from 6 to 20 will be offered to be solved in 30 minutes.
+		<br /><span class="footnote">&nbsp;</span><br />Good luck!
+		<br /><br />
+		<input type=button value="Start!" onclick='start_eval(6, 20);'>
+	  </div>
+	  <div id='tab_2' class="tab">
+		Jump straight to any level:<br />
+		<input id='input_login2' type=text size=15 placeholder="login"><br />
+		<span class='footnote'>Same login as in Training, so the addresses stay the same.</span>
+		<div id='level_buttons' class='level_buttons'></div>
+	  </div>
+
+	  <br />
+      <span class='footnote'>Note: the architecture and addresses used in the following levels are fictitious and are not connected to real world configurations.</span>
+    </div>
+
+    <script>
+	  document.getElementById('input_login').value = load_login();
+	  document.getElementById('input_login2').value = load_login();
+	  build_level_buttons();
+	  showTab(0);
+	</script>
+  </body>
+</html>
