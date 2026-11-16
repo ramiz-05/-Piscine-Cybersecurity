@@ -1,0 +1,37 @@
+.swatch {
+    width: 200px;
+    padding: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.named { background-color: purple; 
+}
+
+.hex { background-color: #800080; 
+}
+
+.rgb { background-color: rgb(128, 0, 128);
+}
+
+.rgba { background-color: rgba(128, 0, 128, 0.5);
+} 
+
+.comparison-box {
+    width: 300px;
+    padding: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black; 
+}
+
+.opacity-box {
+    background-color: rgb(0, 150, 255);
+    opacity: 0.5; 
+}
+
+.rgba-box {
+    background-color: rgba(0, 150, 255, 0.5);
+}

@@ -1,0 +1,24 @@
+docker: 'docker stop' requires at least 1 argument
+
+Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+See 'docker stop --help' for more information
+docker: 'docker rm' requires at least 1 argument
+
+Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+See 'docker rm --help' for more information
+./start.sh: line 10: docker-compose: command not found
+time="2026-11-03T16:53:42+03:00" level=warning msg="/home/raaburam/dev_workspace/Piscine Pro/module 2x2/cyber2x2.1.01/pro_02/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image mine Pulling 
+ Image mine pull access denied for mine, repository does not exist or may require 'docker login' 
+ Image mine Building 
+ Image mine Built 
+ Network pro_02_default Creating 
+ Network pro_02_default Creating 
+ Network pro_02_default Created 
+ Network pro_02_default Created 
+ Container pro_02-web-1 Creating 
+ Container pro_02-web-1 Created 
+ Container pro_02-web-1 Starting 
+ Container pro_02-web-1 Started 

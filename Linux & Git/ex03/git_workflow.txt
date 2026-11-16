@@ -1,0 +1,4 @@
+ edit a file: Making changes, creating, or deleting files in your workspace. 
+ add : Prepares specific changes into a box or staging zone. 
+ Commit: Seals the box and saves a permanent snapshot to local history. 
+ Push: Uploads all accumulated local snapshots to the cloud. 

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramez Abu Ramadan | Software Engineer Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="#about" class="logo">Ramez<span>.dev</span></a>
+            
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="#about" data-i18n="nav_about">About</a></li>
+                    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="#hobbies" data-i18n="nav_hobbies">Hobbies</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="lang-toggle" class="lang-btn" aria-label="Switch Language">
+                    🌐 AR
+                </button>
+                <button id="theme-toggle" class="theme-btn" aria-label="Switch Theme">
+                    ☀️ Light Mode
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section about">
+            <div class="container about-content">
+                <div class="about-text">
+                    <p class="greeting" data-i18n="hero_greeting">Hello, I'm</p>
+                    <h1 data-i18n="hero_name">Ramez Anwar Abu Ramadan</h1>
+                    <h2 data-i18n="hero_title">Software Engineering Student</h2>
+                    <p class="bio" data-i18n="hero_bio">
+                        I am a passionate Software Engineering student at The World Islamic Sciences and Education University (WISE) in Amman, Jordan. I thrive on solving algorithmic challenges, designing robust system architectures, and building clean, responsive web applications from scratch.
+                    </p>
+                    <div class="actions">
+                        <a href="#projects" class="btn primary-btn" data-i18n="btn_work">View My Work</a>
+                        <a href="#contact" class="btn secondary-btn" data-i18n="btn_contact">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="assets/myprofile.jpeg" alt="Ramez Anwar Abu Ramadan" class="profile-pic">
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section about-section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="skills_title">Technical Skills</h2>
+                <div class="skills-grid" id="skills-grid">
+                    <div class="skill-card">
+                        <h3 data-i18n="skill1_title">Frontend Web</h3>
+                        <div class="plan-details">
+                            <p class="plan-tech" data-i18n="skill1_stack"><strong>Core Stack:</strong> HTML5, Semantic Markup, CSS3, Flexbox, Responsive Design, JavaScript</p>
+                            <div class="what-i-do">
+                                <h4 data-i18n="what_i_do">What I Do:</h4>
+                                <ul>
+                                    <li data-i18n="skill1_item1">Build clean, responsive user interfaces that adapt smoothly across desktop and mobile devices.</li>
+                                    <li data-i18n="skill1_item2">Structure accessible, semantic HTML5 documents and modern CSS3/Flexbox layouts.</li>
+                                    <li data-i18n="skill1_item3">Create interactive client-side experiences, dynamic DOM updates, and custom theme toggles using vanilla JavaScript.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3 data-i18n="skill2_title">Programming & Backend</h3>
+                        <div class="plan-details">
+                            <p class="plan-tech" data-i18n="skill2_stack"><strong>Core Stack:</strong> C, C++, Java, Python, PHP, SQL</p>
+                            <div class="what-i-do">
+                                <h4 data-i18n="what_i_do">What I Do:</h4>
+                                <ul>
+                                    <li data-i18n="skill2_item1">Develop server-side web logic and connect applications to relational MySQL databases using PHP and SQL.</li>
+                                    <li data-i18n="skill2_item2">Write efficient, memory-safe low-level programs in C/C++ and object-oriented applications in Java and Python.</li>
+                                    <li data-i18n="skill2_item3">Solve complex algorithmic and data-structure challenges under competitive constraints.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3 data-i18n="skill3_title">Tools & Environment</h3>
+                        <div class="plan-details">
+                            <p class="plan-tech" data-i18n="skill3_stack"><strong>Core Stack:</strong> Linux / Unix Shell, Git & GitHub, VS Code, XAMPP, Jira, MySQL Workbench</p>
+                            <div class="what-i-do">
+                                <h4 data-i18n="what_i_do">What I Do:</h4>
+                                <ul>
+                                    <li data-i18n="skill3_item1">Navigate Linux/Unix environments, manage file permissions, and write Bash scripts to automate workflows.</li>
+                                    <li data-i18n="skill3_item2">Manage source code repositories, branching, and team collaboration cleanly with Git and GitHub.</li>
+                                    <li data-i18n="skill3_item3">Configure local development servers (XAMPP), design schemas in MySQL Workbench, and organize agile sprints in Jira.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3 data-i18n="skill4_title">Software Engineering</h3>
+                        <div class="plan-details">
+                            <p class="plan-tech" data-i18n="skill4_stack"><strong>Core Stack:</strong> System Architecture, SRS Documentation, UML / DFD Modeling (Visual Paradigm), Problem Solving</p>
+                            <div class="what-i-do">
+                                <h4 data-i18n="what_i_do">What I Do:</h4>
+                                <ul>
+                                    <li data-i18n="skill4_item1">Analyze project requirements and write complete Software Requirements Specification (SRS) documents.</li>
+                                    <li data-i18n="skill4_item2">Design system architectures, Use Case diagrams, Activity diagrams, and Data Flow Diagrams (DFDs) in Visual Paradigm.</li>
+                                    <li data-i18n="skill4_item3">Plan end-to-end database schemas and translate real-world problems into structured technical solutions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="projects_title">Project Showcase</h2>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div>
+                            <span class="project-tag" data-i18n="proj1_tag">42 Amman • Intensive Bootcamp</span>
+                            <h3>42 Amman — C & Unix Piscine</h3>
+                            <p data-i18n="proj1_desc">
+                                Completed the intensive 26-day coding bootcamp based on peer-to-peer learning and timed exams:<br>
+                                <strong>• Unix &amp; Git:</strong> Linux CLI navigation, Bash scripting, file permissions, and Git workflows.<br>
+                                <strong>• Low-Level C:</strong> Built standard C library functions from scratch under strict Norminette rules.<br>
+                                <strong>• Memory &amp; Pointers:</strong> Mastered pointer arithmetic, dynamic memory allocation (<code>malloc</code>/<code>free</code>), and structs.<br>
+                                <strong>• Algorithms &amp; Rushes:</strong> Implemented recursion, sorting algorithms, Makefiles, and team Rush projects.
+                            </p>
+                        </div>
+                        <span class="tech-stack">C • Linux/Bash • Git • Memory Management</span>
+                    </article>
+
+                    <article class="project-card">
+                        <div>
+                            <span class="project-tag" data-i18n="proj2_tag">Project 42PiscineCyber</span>
+                            <h3>42PiscineCyber (Projects 00 – 03)</h3>
+                            <p data-i18n="proj2_desc">
+                                <strong>• Project 00 (Shell &amp; Git):</strong> Linux CLI navigation, file permissions, shell scripting, and Git workflows.<br>
+                                <strong>• Project 01 (Semantic HTML):</strong> Structured forms, tables, and accessible document hierarchy.<br>
+                                <strong>• Project 02 (Modern CSS):</strong> Responsive layouts using CSS3, Flexbox, and custom properties.<br>
+                                <strong>• Project 03 (JavaScript &amp; DOM):</strong> Client-side interactivity, event listeners, and dynamic DOM manipulation.
+                            </p>
+                        </div>
+                        <span class="tech-stack">Linux • Git • HTML5 • CSS3 • JS</span>
+                    </article>
+
+                    <article class="project-card">
+                        <div>
+                            <span class="project-tag" data-i18n="proj3_tag">Featured Project</span>
+                            <h3 data-i18n="proj3_title">CampusConnect Platform</h3>
+                            <p data-i18n="proj3_desc">A comprehensive web platform for managing university events, featuring student registration, event tracking, and relational database integration.</p>
+                        </div>
+                        <span class="tech-stack">PHP • MySQL • HTML/CSS • Jira</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="hobbies" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="hobbies_title">Hobbies & Interests</h2>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <h3 data-i18n="hobby1_title">🏍️ Motorcycling</h3>
+                        <p data-i18n="hobby1_desc">Riding my sport motorcycle across Jordan, enjoying the focus, freedom, and mechanical precision of the road.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <h3 data-i18n="hobby2_title">📱 Tech Content Creation</h3>
+                        <p data-i18n="hobby2_desc">Running "Life with a Software Engineer", sharing daily coding routines, university life, and tech insights.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <h3 data-i18n="hobby3_title">🎮 Competitive Gaming & CTFs</h3>
+                        <p data-i18n="hobby3_desc">Solving cybersecurity CTF challenges, competing in coding marathons, and playing tactical and racing games.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container contact-container">
+                <h2 class="section-title" data-i18n="contact_title">Contact Me</h2>
+                <p class="contact-subtitle" data-i18n="contact_subtitle">Have a question or want to collaborate on a project? Send me a message!</p>
+                
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjygjrjv" method="POST">
+                    <div class="form-group">
+                        <label for="name" data-i18n="form_name_label">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" data-i18n-placeholder="form_name_placeholder" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="form_email_label">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="form_message_label">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." data-i18n-placeholder="form_message_placeholder" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn submit-btn" data-i18n="form_submit_btn">Send Message</button>
+                    <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p data-i18n="footer_copy">&copy; 2026 Ramez Anwar Abu Ramadan.</p>
+            <div class="social-links">
+                <a href="https://github.com/ramiz-05" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/ramez-aboramadan-87a6a7390/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="#about" data-i18n="footer_top">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

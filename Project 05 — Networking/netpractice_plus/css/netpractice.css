@@ -1,0 +1,334 @@
+
+/* net Practice CSS */
+/* Warning : some parameters are set / modified by script */
+
+
+/* 42 look: flat light background, black / white, teal accent */
+:root {
+    --c-bg: #F2F4F5;
+    --c-card: #FFFFFF;
+    --c-ink: #0B0B0C;
+    --c-muted: #6B7378;
+    --c-line: #DADFE2;
+    --c-teal: #00BABC;
+    --c-teal-dark: #008E90;
+    --c-teal-soft: #E3F7F7;
+}
+
+body {
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    color: var(--c-ink);
+    padding:0px;
+    margin:0px;
+    background: var(--c-bg);
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+.fade-in {
+    opacity: 0;
+    animation: fadeInUp .6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* message box in index.html */
+
+.intro_div {
+    background-color: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-top: 4px solid var(--c-ink);
+    border-radius: 8px;
+    padding:24px;
+    width:30%;
+    margin:auto;
+    margin-top: 8%;
+    box-shadow: 0 6px 24px rgba(11, 11, 12, 0.08);
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.brand span {
+    color: var(--c-teal);
+}
+
+.intro_div img {
+	width: 25%;
+}
+
+.intro_div .tabs {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+	border-bottom: 1px solid var(--c-line);
+	margin-bottom: 2em;
+	gap: 6px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.intro_div .tabs div {
+	flex: 1;
+	text-align: center;
+	padding: 10px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom: 3px solid transparent;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 90%;
+	color: var(--c-muted);
+}
+
+.intro_div .tabs div:hover {
+	color: var(--c-ink);
+}
+
+.intro_div .tabs div.active {
+	color: var(--c-ink);
+	border-bottom-color: var(--c-teal);
+}
+
+
+.tab {
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+
+	
+/* buttons: black, teal on hover */
+.intro_div input[type=button],
+.goals_div input[type=button] {
+	padding: 10px 18px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid var(--c-ink);
+	background: var(--c-ink);
+	color: #FFFFFF;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.intro_div input[type=button]:hover,
+.goals_div input[type=button]:hover {
+	background: var(--c-teal);
+	border-color: var(--c-teal);
+	color: var(--c-ink);
+}
+
+.intro_div input[type=text] {
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid var(--c-line);
+	background: #FFFFFF;
+	text-align: center;
+}
+
+.intro_div input[type=text]:focus {
+	outline: none;
+	border-color: var(--c-teal);
+	box-shadow: 0 0 0 3px var(--c-teal-soft);
+}
+
+/* goals div */
+.goals_div {
+	margin: 8px;
+	background-color: var(--c-card);
+	width:calc(100% - 16px);
+	border:1px solid var(--c-line);
+	border-left: 5px solid var(--c-teal);
+	border-radius: 6px;
+	padding: 8px 12px;
+	box-shadow: 0 4px 16px rgba(11, 11, 12, 0.06);
+}
+
+.goals_div h2 {
+	margin:5px 0;
+	font-style:normal;
+	font-weight: 800;
+	letter-spacing: 1px;
+}
+
+/* SVG layer */
+.svg_layer {
+    z-index:-4;
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.svg_layer line {
+	stroke: #0B0B0C;
+}
+
+
+/* logs window */
+.logs_div {
+    background-color: var(--c-card);
+    border:1px solid var(--c-line);
+    border-top: 3px solid var(--c-teal);
+    border-radius:4px;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    width:250px;
+    height:200px;
+    font-size:70%;
+	margin: 4px;
+	box-shadow: 0 4px 16px rgba(11, 11, 12, 0.12);
+}
+
+.logs_button {
+    background-color: var(--c-ink);
+    color: #FFFFFF;
+    position:absolute;
+	top:-23px;
+	width: 22px;
+	height: 20px;
+	right: -1px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.logs_button:hover {
+	background-color: var(--c-teal);
+	color: var(--c-ink);
+}
+
+.logs_inner {
+	width: 100%;
+	height: 100%;
+    overflow-y: scroll;
+    position:absolute;
+	top: 0px;
+	left: 0px;
+	padding: 6px;
+}
+
+/* host div (image) */
+.host_div {
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* will be updated by script : position, top, left, width, height, background-image */
+}
+
+
+/* host info (name, route) div */
+.host_info_div {
+    min-width: 170px;
+    min-height: 50px;
+    background-color: var(--c-teal-soft);
+	border: 1px solid var(--c-teal);
+	border-left: 4px solid var(--c-teal);
+    border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(11, 11, 12, 0.10);
+	padding: 3px;
+    /* will be updated by script : position, top, left */
+}
+
+.host_info_div table {
+	width: 100%;
+}
+.host_info_div table td {
+	text-align:center;
+}
+
+
+.if_tab {
+    border-collapse: collapse;
+}
+
+/* interface div */
+.itf_div {
+    min-width: 176px;
+    height: 70px;
+    background-color: var(--c-card);
+	border: 1px solid var(--c-ink);
+	border-left: 4px solid var(--c-ink);
+    border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(11, 11, 12, 0.10);
+	padding: 3px;
+    /* will be updated by script : position, top, left */
+}
+
+.itf_div table {
+	width:100%;
+}
+.itf_div table td {
+	text-align:center;
+}
+
+.host_info_div input, .itf_div input {
+	border: 1px solid var(--c-line);
+	border-radius: 3px;
+	padding: 2px 4px;
+	font-family: Consolas, "Courier New", monospace;
+}
+.host_info_div input:not([disabled]), .itf_div input:not([disabled]) {
+	border-color: var(--c-teal);
+	background: #FFFFFF;
+}
+.host_info_div input[disabled], .itf_div input[disabled] {
+	background: #EEF0F1;
+	color: var(--c-muted);
+}
+
+/* intro footnote */
+.footnote {
+    font-size:70%;
+    font-style:italic;
+    color: var(--c-muted);
+}
+
+/* level select buttons (NetPractice Plus) */
+.level_buttons {
+	margin-top: 10px;
+}
+.level_buttons input[type=button] {
+	width: 48px;
+	padding: 8px 0;
+}
+.level_buttons input.adv {
+	background: var(--c-teal);
+	border-color: var(--c-teal);
+	color: var(--c-ink);
+}
+.level_buttons input.adv:hover {
+	background: var(--c-ink);
+	border-color: var(--c-ink);
+	color: #FFFFFF;
+}
+.tab .footnote {
+	margin-top: 10px;
+}

@@ -1,0 +1,5 @@
+commit 86e94bf54970ad86a56e9c704e60ef93bc226851
+Author: ramiz-05 <ramizaboramadan2@gmail.com>
+Date:   Thu Oct 1 10:59:22 2026 +0300
+
+     first commit

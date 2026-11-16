@@ -1,0 +1,11 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+.active {
+    background-color: yellow;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid black;
+}
