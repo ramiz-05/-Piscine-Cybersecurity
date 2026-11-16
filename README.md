@@ -187,4 +187,4 @@ GitHub: [@ramiz-05](https://github.com/ramiz-05)
 
 ---
 
-*Built during the 42 Barcelona Cybersecurity Piscine.*
+*Built during the 42 AMMAN Cybersecurity Piscine.*
