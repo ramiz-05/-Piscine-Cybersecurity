@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BreakPoint is an interactive web security learning platform. Explore IDOR, Race Condition, and Prototype Pollution labs through attack, fix, and block simulations.">
+  <title>BreakPoint | Interactive Web Security Labs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="stylesheet/global.css">
+  <link rel="stylesheet" href="stylesheet/styles.css">
+  <link rel="stylesheet" href="stylesheet/labs.css">
+  <link rel="stylesheet" href="stylesheet/footer.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="BreakPoint home">BreakPoint</a>
+      <nav aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="pages/lab-1.html">IDOR</a>
+        <a href="pages/lab-2.html">Race Condition</a>
+        <a href="pages/lab-3.html">Prototype Pollution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">Interactive Web Security Labs</p>
+          <h1 id="hero-title">Learn to Break.<br><span>Build to Protect.</span></h1>
+          <p class="hero-description">
+            Three short hands-on labs. Run an attack in a safe sandbox,
+            switch on the fix, then see the attack get blocked.
+          </p>
+          <a class="btn" href="#labs">Explore Labs <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="hero-code" aria-label="Example JavaScript security sandbox code">
+          <div class="hero-code-bar">
+            <div class="window-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span>breakpoint / sandbox.js</span>
+          </div>
+          <pre class="hero-code-body"><code><span class="syntax-muted">const</span> mode = <span class="syntax-string">"vulnerable"</span>;
+<span class="syntax-muted">const</span> result = <span class="syntax-keyword">await</span> runAttack();
+
+<span class="syntax-keyword">if</span> (result.blocked) {
+  console.log(<span class="syntax-success">"Protected!"</span>);
+} <span class="syntax-keyword">else</span> {
+  console.log(<span class="syntax-warning">"Exploit found"</span>);
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="labs" class="labs-section" aria-labelledby="labs-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 class="section-title" id="labs-title">Explore Security Labs</h2>
+          <p class="section-description">Learn by testing, comparing, and fixing.</p>
+        </div>
+
+        <ol class="how-steps" aria-label="How the security labs work">
+          <li>
+            <strong>Attack</strong>
+            <span>Run a payload against the vulnerable version.</span>
+          </li>
+          <li>
+            <strong>Fix</strong>
+            <span>Switch to the fixed implementation.</span>
+          </li>
+          <li>
+            <strong>Block</strong>
+            <span>Repeat the test. The attack is stopped.</span>
+          </li>
+        </ol>
+
+        <div class="labs-grid">
+          <a class="lab-card" href="pages/lab-1.html">
+            <span class="lab-card__number">01</span>
+            <h3>IDOR</h3>
+            <p>Change one ID to access another employee's private payroll record.</p>
+            <span class="lab-card__action">Open lab <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="lab-card lab-card--featured" href="pages/lab-2.html">
+            <span class="lab-card__number">02</span>
+            <h3>Race Condition</h3>
+            <p>Two simultaneous requests try to redeem a single-use coupon.</p>
+            <span class="lab-card__action">Open lab <span aria-hidden="true">&rarr;</span></span>
+          </a>
+
+          <a class="lab-card" href="pages/lab-3.html">
+            <span class="lab-card__number">03</span>
+            <h3>Prototype Pollution</h3>
+            <p>A crafted JSON payload changes what JavaScript objects inherit.</p>
+            <span class="lab-card__action">Open lab <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>BreakPoint</h2>
+        <p>Learn web security through practical labs.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="pages/lab-1.html">IDOR</a>
+        <a href="pages/lab-2.html">Race Condition</a>
+        <a href="pages/lab-3.html">Prototype Pollution</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BreakPoint. Web Security Labs.</p>
+      <p>Final project developed as part of a scholarship program offered by 42 Amman.</p>
+    </div>
+  </footer>
+</body>
+</html>

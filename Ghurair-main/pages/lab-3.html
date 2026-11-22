@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn Prototype Pollution with a safe interactive JavaScript security lab.">
+  <title>Prototype Pollution Lab | BreakPoint</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+  <!-- Keep the original BreakPoint stylesheets -->
+  <link rel="stylesheet" href="../stylesheet/global.css">
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <link rel="stylesheet" href="../stylesheet/labs.css">
+  <link rel="stylesheet" href="../stylesheet/footer.css">
+
+  <script src="../js/lab-engine.js" defer></script>
+  <script src="../js/lab-3.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="BreakPoint home">BreakPoint</a>
+    <nav aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="lab-1.html">IDOR</a>
+      <a href="lab-2.html">Race Condition</a>
+      <a href="lab-3.html" aria-current="page">Prototype Pollution</a>
+    </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="lab-header">
+      <div class="container">
+        <a class="back-link" href="../index.html#labs">&larr; Back to Labs</a>
+        <p class="eyebrow">Security Lab 03</p>
+        <h1>Prototype Pollution</h1>
+        <p class="lab-intro">Send one crafted JSON object and make every user look like an admin.</p>
+        <div class="lab-tags">
+          <span>OWASP A08:2025 · Software or Data Integrity Failures</span>
+          <span>CWE-1321</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container lab-layout lab-wide-layout">
+      <!-- 01: Concept -->
+      <section class="lab-panel" id="vulnerability">
+        <h2>01. What It Is</h2>
+        <p>
+          Prototype pollution happens when attacker input changes the shared
+          prototype that every JavaScript object inherits from. One polluted
+          property, such as <code>isAdmin</code>, then appears on objects that never
+          set it, which can break permission checks. It is OWASP
+          <strong>A08:2025 Software or Data Integrity Failures</strong> and
+          <strong>CWE-1321</strong>  (a child of CWE-915).
+        </p>
+      </section>
+
+      <!-- 02: ONE interactive simulation -->
+      <section class="lab-panel" id="simulation">
+        <h2>02. The Line and Try It</h2>
+        <p>
+          Press <strong>Run Payload</strong> in Vulnerable mode and look at the
+          normal user below. Then switch to <strong>Fixed</strong> and run the same payload.
+        </p>
+
+        <div class="lab-demo-container prototype-demo">
+          <div class="simulation-toolbar">
+            <span class="field-label">Security Mode</span>
+            <div class="mode-switch" role="group" aria-label="Security mode">
+              <button type="button" id="vulnerableMode" class="mode-btn active" aria-pressed="true">Vulnerable</button>
+              <button type="button" id="fixedMode" class="mode-btn" aria-pressed="false">Fixed</button>
+            </div>
+          </div>
+
+          <div class="pp-grid">
+            <!-- Wider JavaScript preview -->
+            <div class="pp-column">
+              <h3 class="pp-subtitle" id="codeTitle">Vulnerable code</h3>
+              <div class="code-window">
+                <div class="code-header">
+                  <span>Merge function (simplified)</span>
+                  <span id="codeModeBadge" class="code-status vulnerable-status">Vulnerable</span>
+                </div>
+                <pre class="pp-code"><code id="codeSample" aria-label="Code sample"></code></pre>
+              </div>
+              <div class="code-explanation pp-note" id="codeExplanation" aria-live="polite">
+                <span class="pp-dot"></span>
+                <span>Unsafe recursive merging may follow inherited properties.</span>
+              </div>
+            </div>
+
+            <!-- Original three payload choices: admin, role, debug -->
+            <div class="pp-column">
+              <h3 class="pp-subtitle" id="payloadLabel">Try it: choose a payload</h3>
+              <div class="pp-payloads" role="group" aria-labelledby="payloadLabel">
+                <button type="button" class="pp-payload selected" data-payload="admin" aria-pressed="true">
+                  <span class="pp-num">01</span>
+                  <span><strong>Make everyone an admin</strong><small><code>{"__proto__": {"isAdmin": true}}</code></small></span>
+                </button>
+                <button type="button" class="pp-payload" data-payload="role" aria-pressed="false">
+                  <span class="pp-num">02</span>
+                  <span><strong>Change everyone's role</strong><small><code>{"__proto__": {"role": "admin"}}</code></small></span>
+                </button>
+                <button type="button" class="pp-payload" data-payload="debug" aria-pressed="false">
+                  <span class="pp-num">03</span>
+                  <span><strong>Turn on debug mode</strong><small><code>{"__proto__": {"debug": true}}</code></small></span>
+                </button>
+              </div>
+
+              <div class="pp-actions">
+                <button type="button" class="run-btn" id="runPayload">&#9654; Run Payload</button>
+                <button type="button" class="mode-btn" id="resetLab">Reset Experiment</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Only one result display -->
+          <div class="result-box" id="resultPanel" aria-live="polite">
+            <div class="result-heading">
+              <h3 id="resultTitle">No payload run yet</h3>
+              <span class="pp-status neutral" id="resultStatus">NOT RUN</span>
+            </div>
+            <p id="resultMessage">Press Run Payload. Then check the normal user below.</p>
+            <div class="pp-results">
+              <div class="pp-result" id="roleTile"><span>Normal user: role</span><strong id="roleValue">user</strong></div>
+              <div class="pp-result" id="adminTile"><span>Normal user: isAdmin</span><strong id="adminValue">false</strong></div>
+              <div class="pp-result" id="debugTile"><span>Normal user: debug</span><strong id="debugValue">false</strong></div>
+            </div>
+            <div class="pp-console">
+              <strong>SAFETY CHECK</strong>
+              <span id="consoleOutput">Runs on a sandbox, never on the page's real Object.prototype.</span>
+            </div>
+          </div>
+          <p class="demo-caption">Runs in your browser on a throwaway object. Nothing real is changed.</p>
+        </div>
+      </section>
+
+      <!-- 03: Impact -->
+      <section class="lab-panel" id="impact">
+        <h2>03. Why It Matters</h2>
+        <p>
+          A polluted prototype can change permission checks, settings and feature
+          flags across the whole app, and in some Node.js apps it has led to remote
+          code execution.
+        </p>
+        <p class="code-explanation">
+          <strong>Real incident:</strong> In 2019, <code>defaultsDeep</code> in lodash,
+          one of the most used npm libraries, was found to be open to prototype
+          pollution (CVE-2019-10744, rated 9.1 Critical). It was fixed in lodash 4.17.12.
+        </p>
+      </section>
+
+      <section class="lab-panel" id="fix-section">
+        <h2>04. The Fix</h2>
+        <p>
+          Skip the dangerous keys <code>__proto__</code>, <code>constructor</code> and
+          <code>prototype</code>, and only reuse properties the target owns.
+        </p>
+        <div class="code-window">
+          <div class="code-header">
+            <span>Dangerous-key filtering</span>
+            <span class="code-status fixed-status">Fixed</span>
+          </div>
+          <pre class="fix-code"><code id="fixCode" aria-label="Fixed code"></code></pre>
+        </div>
+        <p class="code-explanation">
+          <strong>Security improvement:</strong> The highlighted line drops the
+          <code>__proto__</code> key before it is merged, so the same payload no
+          longer reaches the shared prototype. Safer alternatives are
+          <code>Object.create(null)</code> objects, <code>Map</code>, or
+          <code>Object.freeze(Object.prototype)</code>.
+        </p>
+      </section>
+
+      <section class="lab-panel" id="sources">
+        <h2>05. Sources</h2>
+        <ul class="source-list">
+          <li><a href="https://top10.owasp.org/2025/A08_2025-Software_or_Data_Integrity_Failures/" target="_blank" rel="noopener">OWASP Top 10:2025, A08 Software or Data Integrity Failures</a></li>
+          <li><a href="https://cwe.mitre.org/data/definitions/1321.html" target="_blank" rel="noopener">CWE-1321: Improperly Controlled Modification of Object Prototype Attributes</a></li>
+          <li><a href="https://portswigger.net/web-security/prototype-pollution" target="_blank" rel="noopener">PortSwigger Web Security Academy: Prototype pollution</a></li>
+          <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10744" target="_blank" rel="noopener">NVD: CVE-2019-10744 (lodash defaultsDeep)</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>BreakPoint</h2>
+        <p>Learn web security through practical labs.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="lab-1.html">IDOR</a>
+        <a href="lab-2.html">Race Condition</a>
+        <a href="lab-3.html">Prototype Pollution</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BreakPoint. Web Security Labs.</p>
+      <p>Final project developed as part of a scholarship program offered by 42 Amman.</p>
+    </div>
+  </footer>
+</body>
+</html>

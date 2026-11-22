@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Race Conditions with a safe interactive single-use coupon simulation.">
+  <title>Race Condition Lab | BreakPoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../stylesheet/global.css">
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <link rel="stylesheet" href="../stylesheet/labs.css">
+  <link rel="stylesheet" href="../stylesheet/footer.css">
+  <script src="../js/lab-engine.js" defer></script>
+  <script src="../js/lab-2.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="BreakPoint home">BreakPoint</a>
+    <nav aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="lab-1.html">IDOR</a>
+      <a href="lab-2.html" aria-current="page">Race Condition</a>
+      <a href="lab-3.html">Prototype Pollution</a>
+    </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Same hero structure as IDOR and Prototype Pollution. -->
+    <section class="lab-header">
+      <div class="container">
+        <a class="back-link" href="../index.html#labs">&larr; Back to Labs</a>
+        <p class="eyebrow">Security Lab 02</p>
+        <h1>Race Condition</h1>
+        <p class="lab-intro">Use a single-use coupon twice by sending two requests at the same moment.</p>
+        <div class="lab-tags">
+          <span>OWASP A06:2025 · Insecure Design</span>
+          <span>CWE-362</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container lab-layout lab-wide-layout">
+      <!-- 01: Same placement as the other two labs. -->
+      <section class="lab-panel" id="vulnerability">
+        <h2>01. What It Is</h2>
+        <p>
+          A race condition happens when two requests run at the same time and the
+          result depends on which one finishes first. If a server checks a coupon
+          but only marks it used later, both requests can pass the check. It is a
+          check-then-use flaw: OWASP <strong>A06:2025 Insecure Design</strong> and
+          <strong>CWE-362</strong>.
+        </p>
+      </section>
+
+      <!-- 02: Same integrated experiment pattern as Prototype Pollution. -->
+      <section class="lab-panel" id="simulation">
+        <h2>02. The Line and Try It</h2>
+        <p>
+          Coupon <strong>SAVE50</strong> can be used <strong>once</strong>. Choose a request test and press <strong>Run Test</strong>. Switch to
+          <strong>Fixed</strong> to compare the result.
+        </p>
+
+        <div class="lab-demo-container race-demo">
+          <div class="simulation-toolbar">
+            <span class="field-label">Security Mode</span>
+            <div class="mode-switch" role="group" aria-label="Security mode">
+              <button type="button" id="vulnerableMode" class="mode-btn active" aria-pressed="true">Vulnerable</button>
+              <button type="button" id="fixedMode" class="mode-btn" aria-pressed="false">Fixed</button>
+            </div>
+          </div>
+
+          <div class="pp-grid">
+            <div class="pp-column" id="race-code-view">
+              <h3 class="pp-subtitle" id="codeTitle">Vulnerable code</h3>
+              <div class="code-window">
+                <div class="code-header">
+                  <span>Server code (simplified)</span>
+                  <span id="codeModeBadge" class="code-status vulnerable-status">Vulnerable</span>
+                </div>
+                <pre class="pp-code"><code id="codeSample" aria-label="Code sample"></code></pre>
+              </div>
+              <div class="code-explanation pp-note" id="codeExplanation" aria-live="polite">
+                <span class="pp-dot" aria-hidden="true"></span>
+                <span>The coupon is marked as used only after the waiting period.</span>
+              </div>
+            </div>
+
+            <div class="pp-column">
+              <h3 class="pp-subtitle" id="testLabel">Choose a Request Test</h3>
+              <div class="pp-payloads" role="group" aria-labelledby="testLabel">
+                <button type="button" class="pp-payload selected" data-test="normal" aria-pressed="true">
+                  <span class="pp-num">01</span>
+                  <span><strong>Normal Request</strong><small>One request redeems the coupon</small></span>
+                </button>
+                <button type="button" class="pp-payload" data-test="sequential" aria-pressed="false">
+                  <span class="pp-num">02</span>
+                  <span><strong>Sequential Requests</strong><small>Request B starts after A finishes</small></span>
+                </button>
+                <button type="button" class="pp-payload" data-test="concurrent" aria-pressed="false">
+                  <span class="pp-num">03</span>
+                  <span><strong>Concurrent Requests</strong><small>Both requests start together</small></span>
+                </button>
+              </div>
+              <div class="pp-actions rc-actions">
+                <button type="button" class="run-btn" id="runTest">&#9654; Run Test</button>
+                <button type="button" class="mode-btn" id="resetLab2">Reset Experiment</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shared full-width result panel, like Prototype Pollution. -->
+          <div class="result-box rc-result-box" id="resultPanel" aria-live="polite">
+            <div class="result-heading">
+              <h3 id="resultTitle">No test run yet</h3>
+              <span class="pp-status neutral" id="resultStatus">NOT RUN</span>
+            </div>
+            <p class="rc-result-message" id="resultMessage">Press Run Test to see what happens.</p>
+            <pre id="results" class="rc-result-text">No requests yet</pre>
+            <details class="rc-timeline-details" id="timelineDetails">
+              <summary>Step-by-step timeline <span id="eventCount">0 events</span></summary>
+              <pre id="timeline" aria-live="polite">No events yet</pre>
+            </details>
+          </div>
+          <p class="demo-caption">Runs in your browser. No real requests are sent.</p>
+        </div>
+      </section>
+
+      <section class="lab-panel" id="impact">
+        <h2>03. Why It Matters</h2>
+        <p>
+          Race conditions can cause duplicate coupon redemptions, double withdrawals,
+          oversold stock and other money-related bugs, because every request thinks
+          it is the only one.
+        </p>
+        <p class="code-explanation">
+          <strong>Real incident:</strong> In 2015, researcher Egor Homakov showed that
+          sending two Starbucks gift-card transfers at the same moment made the
+          balance get credited twice, adding money to a card from nothing.
+        </p>
+      </section>
+
+      <section class="lab-panel" id="fix-section">
+        <h2>04. The Fix</h2>
+        <p>
+          Reserve the coupon <strong>before</strong> the first wait. A second request
+          then sees it as used and is rejected.
+        </p>
+        <div class="code-window">
+          <div class="code-header">
+            <span>Fixed implementation</span>
+            <span class="code-status fixed-status">Fixed</span>
+          </div>
+          <pre class="fix-code"><code id="fixCode" aria-label="Fixed code"></code></pre>
+        </div>
+        <p class="code-explanation">
+          <strong>Security improvement:</strong> The highlighted line closes the gap
+          between checking and using the coupon, so the same concurrent payload now
+          redeems it only once. Real servers must do this atomically, for example with
+          a single database <code>UPDATE ... WHERE used = false</code>, a lock or a transaction.
+        </p>
+      </section>
+
+      <section class="lab-panel" id="sources">
+        <h2>05. Sources</h2>
+        <ul class="source-list">
+          <li><a href="https://top10.owasp.org/2025/A06_2025-Insecure_Design/" target="_blank" rel="noopener">OWASP Top 10:2025, A06 Insecure Design</a></li>
+          <li><a href="https://cwe.mitre.org/data/definitions/362.html" target="_blank" rel="noopener">CWE-362: Concurrent Execution using Shared Resource with Improper Synchronization</a></li>
+          <li><a href="https://portswigger.net/web-security/race-conditions" target="_blank" rel="noopener">PortSwigger Web Security Academy: Race conditions</a></li>
+          <li><a href="https://sakurity.com/blog/2015/05/21/starbucks.html" target="_blank" rel="noopener">Egor Homakov: Starbucks gift card race condition write-up (2015)</a></li>
+          <li><a href="https://www.schneier.com/blog/archives/2015/05/race_condition_.html" target="_blank" rel="noopener">Schneier on Security: Race Condition Exploit in Starbucks Gift Cards</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>BreakPoint</h2>
+        <p>Learn web security through practical labs.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="lab-1.html">IDOR</a>
+        <a href="lab-2.html">Race Condition</a>
+        <a href="lab-3.html">Prototype Pollution</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BreakPoint. Web Security Labs.</p>
+      <p>Final project developed as part of a scholarship program offered by 42 Amman.</p>
+    </div>
+  </footer>
+</body>
+</html>

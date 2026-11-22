@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Insecure Direct Object References (IDOR) through a safe interactive payroll access-control demonstration.">
+  <title>IDOR Lab | BreakPoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../stylesheet/global.css">
+  <link rel="stylesheet" href="../stylesheet/styles.css">
+  <link rel="stylesheet" href="../stylesheet/labs.css">
+  <link rel="stylesheet" href="../stylesheet/footer.css">
+  <script src="../js/lab-engine.js" defer></script>
+  <script src="../js/lab-1.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="BreakPoint home">BreakPoint</a>
+    <nav aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="lab-1.html" aria-current="page">IDOR</a>
+      <a href="lab-2.html">Race Condition</a>
+      <a href="lab-3.html">Prototype Pollution</a>
+    </nav>
+    </div>
+  </header>
+  <main>
+    <section class="lab-header">
+      <div class="container">
+        <a class="back-link" href="../index.html#labs">&larr; Back to Labs</a>
+        <p class="eyebrow">Security Lab 01</p>
+        <h1>Insecure Direct Object Reference (IDOR)</h1>
+        <p class="lab-intro">Read another employee's payroll record by changing one number in a request.</p>
+        <div class="lab-tags">
+          <span>OWASP A01:2025 · Broken Access Control</span>
+          <span>CWE-639</span>
+        </div>
+      </div>
+    </section>
+    <div class="container lab-layout lab-wide-layout">
+      <section class="lab-panel" id="vulnerability">
+        <h2>01. What It Is</h2>
+        <p>IDOR happens when an app uses an ID sent by the user (like <code>slip_id=1002</code>) to fetch a record without checking that the record belongs to them. Changing the ID in the request is enough to read someone else's data. It is OWASP <strong>A01:2025 Broken Access Control</strong> and <strong>CWE-639</strong>.</p>
+      </section>
+
+      <section class="lab-panel" id="simulation">
+        <h2>02. The Line and Try It</h2>
+        <p>You are logged in as employee <strong>1001</strong>. Each payload below asks for record <strong>1002</strong>, which is not yours. Press <strong>Send Request</strong> in Vulnerable mode, then switch to <strong>Fixed</strong> and send it again.</p>
+        <div class="lab-demo-container idor-demo">
+          <div class="simulation-toolbar">
+            <span class="field-label">Security Mode</span>
+            <div class="mode-switch" role="group" aria-label="Security mode">
+              <button type="button" class="mode-btn active" id="vulnerableMode" aria-pressed="true">Vulnerable</button>
+              <button type="button" class="mode-btn" id="fixedMode" aria-pressed="false">Fixed</button>
+            </div>
+          </div>
+          <div class="pp-grid">
+            <div class="pp-column">
+              <h3 class="pp-subtitle" id="codeTitle">Vulnerable code</h3>
+              <div class="code-window">
+                <div class="code-header"><span>Server code (simplified)</span><span id="codeModeBadge" class="code-status vulnerable-status">Vulnerable</span></div>
+                <pre class="pp-code"><code id="codeSample" aria-label="Code sample"></code></pre>
+              </div>
+              <div id="codeExplanation" class="code-explanation pp-note" aria-live="polite">
+                <span class="pp-dot" aria-hidden="true"></span>
+                <span>The server looks up the requested record but does not verify ownership.</span>
+              </div>
+            </div>
+            <div class="pp-column">
+              <h3 class="pp-subtitle" id="vectorLabel">Try it: choose a payload</h3>
+              <div class="pp-payloads" role="group" aria-labelledby="vectorLabel">
+                <button type="button" class="pp-payload selected" data-vector="query" aria-pressed="true">
+                  <span class="pp-num">01</span><span><strong>ID in the URL</strong><small><code>?slip_id=1002</code></small></span>
+                </button>
+                <button type="button" class="pp-payload" data-vector="body" aria-pressed="false">
+                  <span class="pp-num">02</span><span><strong>ID in a JSON body</strong><small><code>{"slip_id": 1002}</code></small></span>
+                </button>
+                <button type="button" class="pp-payload" data-vector="token" aria-pressed="false">
+                  <span class="pp-num">03</span><span><strong>ID hidden in Base64</strong><small><code>ref=MTAwMg==</code> (that is 1002)</small></span>
+                </button>
+              </div>
+              <div class="code-window">
+                <div class="code-header"><span id="payloadTitle">URL Query Parameter</span><span>REQUEST</span></div>
+                <div class="request-editor">
+                  <label class="request-prefix" for="payloadInput" id="requestPrefix">GET /api/payroll/view?slip_id=</label>
+                  <input id="payloadInput" type="text" autocomplete="off" spellcheck="false" aria-label="Requested record ID or payload">
+                  <div class="quick-chips" id="quickChips" aria-label="Sample payroll records"></div>
+                </div>
+              </div>
+              <div class="pp-actions">
+                <button type="button" class="run-btn" id="sendRequest">&#9654; Send Request</button>
+                <button type="button" class="mode-btn" id="resetLab">Reset Experiment</button>
+              </div>
+            </div>
+          </div>
+          <div class="result-box" id="resultPanel" aria-live="polite">
+            <div class="result-heading">
+              <h3 id="resultTitle">No request sent yet</h3>
+              <span class="pp-status neutral" id="resultStatus">NOT RUN</span>
+            </div>
+            <p id="resultMessage">Press Send Request to see what the server returns.</p>
+            <div class="pp-results">
+              <div class="pp-result"><span>HTTP status</span><strong id="statusValue">—</strong></div>
+              <div class="pp-result"><span>Record belongs to</span><strong id="ownerValue">—</strong></div>
+              <div class="pp-result" id="verdictTile"><span>Result</span><strong id="verdictValue">—</strong></div>
+            </div>
+            <div class="code-window result-code-window">
+              <div class="code-header"><span>Server response</span><span>JSON</span></div>
+              <pre class="response-preview"><code id="responseOutput">Nothing yet.</code></pre>
+            </div>
+          </div>
+          <p class="demo-caption">Runs in your browser with made-up employees. No real requests are sent.</p>
+        </div>
+      </section>
+      <section class="lab-panel" id="impact">
+        <h2>03. Why It Matters</h2>
+        <p>Missing authorization checks let an attacker read, and sometimes change, other people's payroll, orders or documents just by editing an ID.</p>
+        <p class="code-explanation"><strong>Real incident:</strong> In 2019, First American Financial's website served title-insurance documents by a sequential number in the URL. Changing one digit showed other people's files, exposing about 885 million records, including bank and Social Security numbers.</p>
+      </section>
+      <section class="lab-panel" id="fix-section">
+        <h2>04. The Fix</h2>
+        <p>Every resource request must verify that the authenticated user has permission to access the requested record. Base64 encoding or hiding IDs does not replace authorization.</p>
+        <div class="code-window">
+          <div class="code-header"><span>Object-level authorization</span><span class="code-status fixed-status">Fixed</span></div>
+          <pre class="fix-code"><code id="fixCode" aria-label="Fixed code"></code></pre>
+        </div>
+        <p class="code-explanation"><strong>Security improvement:</strong> Check the record's ownership on the server before sending the response. The highlighted line is the fix: the same payload now gets <strong>403 Forbidden</strong>.</p>
+      </section>
+      <section class="lab-panel" id="sources">
+        <h2>05. Sources</h2>
+        <ul class="source-list">
+          <li><a href="https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/" target="_blank" rel="noopener">OWASP Top 10:2025, A01 Broken Access Control</a></li>
+          <li><a href="https://cwe.mitre.org/data/definitions/639.html" target="_blank" rel="noopener">CWE-639: Authorization Bypass Through User-Controlled Key</a></li>
+          <li><a href="https://portswigger.net/web-security/access-control/idor" target="_blank" rel="noopener">PortSwigger Web Security Academy: IDOR</a></li>
+          <li><a href="https://krebsonsecurity.com/2019/05/first-american-financial-corp-leaked-hundreds-of-millions-of-title-insurance-records/" target="_blank" rel="noopener">KrebsOnSecurity: First American Financial leak (24 May 2019)</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand"><h2>BreakPoint</h2><p>Learn web security through practical labs.</p></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="lab-1.html">IDOR</a>
+        <a href="lab-2.html">Race Condition</a>
+        <a href="lab-3.html">Prototype Pollution</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BreakPoint. Web Security Labs.</p>
+      <p>Final project developed as part of a scholarship program offered by 42 Amman.</p>
+    </div>
+  </footer>
+</body>
+</html>
